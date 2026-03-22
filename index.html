@@ -149,11 +149,25 @@
         >
       </div>
       <div class="md:hidden">
-        <span class="material-symbols-outlined text-primary cursor-pointer"
-          >menu</span
-        >
+        <button id="menu-btn" class="text-primary">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
       </div>
     </nav>
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="fixed top-0 left-0 w-full h-screen bg-black/80 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-10 text-center transform -translate-y-full transition-transform duration-500 md:hidden"
+    >
+      <a href="#home" class="text-white text-2xl tracking-widest">Home</a>
+      <a href="#gallery" class="text-white text-2xl tracking-widest">Gallery</a>
+      <a href="#about" class="text-white text-2xl tracking-widest">About</a>
+      <a href="#contact" class="text-white text-2xl tracking-widest">Contact</a>
+
+      <button id="close-menu" class="mt-10 text-neutral-400">
+        <span class="material-symbols-outlined text-3xl">close</span>
+      </button>
+    </div>
     <!-- Hero Section -->
     <section
       id="home"
@@ -508,6 +522,26 @@
 
       sections.forEach((section) => {
         observer.observe(section);
+      });
+    </script>
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const closeMenu = document.getElementById("close-menu");
+
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.remove("-translate-y-full");
+      });
+
+      closeMenu.addEventListener("click", () => {
+        mobileMenu.classList.add("-translate-y-full");
+      });
+
+      // auto close saat klik link
+      document.querySelectorAll("#mobile-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("-translate-y-full");
+        });
       });
     </script>
   </body>
