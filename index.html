@@ -108,6 +108,9 @@
       .glass-nav {
         backdrop-filter: blur(20px);
       }
+      html {
+        scroll-behavior: smooth;
+      }
     </style>
   </head>
   <body
@@ -125,22 +128,22 @@
       <div class="hidden md:flex items-center space-x-12">
         <a
           class="font-manrope font-light tracking-tighter text-neutral-50 font-medium border-b border-neutral-50 pb-1"
-          href="#"
+          href="#home"
           >Home</a
         >
         <a
           class="font-manrope font-light tracking-tighter text-neutral-400 hover:text-neutral-50 transition-colors duration-500"
-          href="404.html"
+          href="#gallery"
           >Gallery</a
         >
         <a
           class="font-manrope font-light tracking-tighter text-neutral-400 hover:text-neutral-50 transition-colors duration-500"
-          href="404.html"
+          href="#about"
           >About</a
         >
         <a
           class="font-manrope font-light tracking-tighter text-neutral-400 hover:text-neutral-50 transition-colors duration-500"
-          href="404.html"
+          href="#contact"
           >Contact</a
         >
       </div>
@@ -152,6 +155,7 @@
     </nav>
     <!-- Hero Section -->
     <section
+      id="home"
       class="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden"
     >
       <div class="absolute inset-0 z-0">
@@ -183,7 +187,7 @@
       </div>
     </section>
     <!-- Featured Gallery Section -->
-    <section class="bg-surface py-32 px-8 md:px-24">
+    <section id="gallery" class="scroll-mt-16 bg-surface py-32 px-8 md:px-24">
       <div class="max-w-7xl mx-auto">
         <div
           class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8"
@@ -308,7 +312,8 @@
           </div>
         </div>
         <div class="mt-24 flex justify-center">
-          <a href="404.html"
+          <a
+            href="404.html"
             class="px-12 py-5 bg-primary text-on-primary font-headline tracking-widest text-xs uppercase hover:bg-primary-container transition-colors duration-500"
           >
             View Full Gallery
@@ -317,7 +322,10 @@
       </div>
     </section>
     <!-- About Section -->
-    <section class="bg-surface-container-low py-40 px-8">
+    <section
+      id="about"
+      class="scroll-mt-16 bg-surface-container-low py-40 px-8"
+    >
       <div
         class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-16 md:gap-32"
       >
@@ -370,7 +378,7 @@
       </div>
     </section>
     <!-- Contact / Social CTA -->
-    <section class="bg-surface py-32 text-center">
+    <section id="contact" class="scroll-mt-16 bg-surface py-32 text-center">
       <div class="max-w-2xl mx-auto px-4">
         <h2
           class="font-headline text-5xl md:text-7xl font-light text-primary mb-12"
@@ -388,6 +396,15 @@
         </a>
       </div>
     </section>
+    <a
+      href="https://tatta-portofolio.vercel.app"
+      class="fixed bottom-8 right-8 z-50 px-5 py-3 bg-surface-container/60 backdrop-blur-lg border border-outline-variant/20 flex items-center gap-2 hover:scale-105 active:scale-95 transition-all"
+    >
+      <span class="material-symbols-outlined text-primary">open_in_new</span>
+      <span class="font-label text-xs uppercase tracking-wider text-on-surface">
+        Other Page
+      </span>
+    </a>
     <!-- Footer -->
     <footer
       class="bg-neutral-900 dark:bg-[#0E0E0E] py-24 flex flex-col items-center justify-center space-y-8 w-full"
@@ -400,13 +417,15 @@
       <div class="flex flex-wrap justify-center gap-8 md:gap-12">
         <a
           class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 hover:text-neutral-50 transition-colors duration-300"
-          href="https://www.instagram.com/tatta.lens/" target="_blank"
+          href="https://www.instagram.com/tatta.lens/"
+          target="_blank"
           >Instagram</a
         >
         <a
           class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 hover:text-neutral-50 transition-colors duration-300"
-          href="https://www.behance.net/tattalens" target="_blank"
-          >Behance</a
+          href="https://www.youtube.com/@livilingiblin"
+          target="_blank"
+          >Youtube</a
         >
         <a
           class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 hover:text-neutral-50 transition-colors duration-300"
@@ -417,7 +436,7 @@
       <div
         class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 pt-8 opacity-50"
       >
-        © 2024 THE CINEMATIC GALLERY. ALL RIGHTS RESERVED.
+        © 2026 TATTA'S LENS - THE CINEMATIC GALLERY. CREATED &amp; DESIGNED.
       </div>
     </footer>
     <!-- Signature Component: Metadata HUD (Hidden by default, shown for large imagery context) -->
@@ -450,5 +469,45 @@
         </div>
       </div>
     </div>
+    <script>
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll("nav a");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute("id");
+
+              navLinks.forEach((link) => {
+                link.classList.remove(
+                  "text-neutral-50",
+                  "border-b",
+                  "border-neutral-50",
+                );
+                link.classList.add("text-neutral-400");
+              });
+
+              const activeLink = document.querySelector(`nav a[href="#${id}"]`);
+              if (activeLink) {
+                activeLink.classList.remove("text-neutral-400");
+                activeLink.classList.add(
+                  "text-neutral-50",
+                  "border-b",
+                  "border-neutral-50",
+                );
+              }
+            }
+          });
+        },
+        {
+          threshold: 0.5, // seberapa banyak section terlihat sebelum dianggap aktif
+        },
+      );
+
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+    </script>
   </body>
 </html>
