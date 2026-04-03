@@ -117,38 +117,62 @@
       class="fixed top-0 w-full z-50 bg-transparent dark:bg-neutral-950/60 backdrop-blur-xl flex justify-between items-center px-8 py-6 w-full"
     >
       <div
-        class="text-2xl font-light tracking-[0.2em] text-neutral-50 font-headline"
+        class="text-2xl font-light tracking-[0.2em] text-neutral-50 font-manrope"
       >
         TATTA'S PAGE
       </div>
-      <div class="hidden md:flex space-x-12 items-center">
+      <div class="hidden md:flex items-center space-x-12">
         <a
           class="font-manrope font-light tracking-tighter text-neutral-400 hover:text-neutral-50 transition-colors duration-500"
-          href="index.html"
+          href="index.html#home"
           >Home</a
         >
         <a
           class="font-manrope font-light tracking-tighter text-neutral-50 font-medium border-b border-neutral-50 pb-1"
-          href="#"
+          href="index.html#gallery"
           >Gallery</a
         >
         <a
           class="font-manrope font-light tracking-tighter text-neutral-400 hover:text-neutral-50 transition-colors duration-500"
-          href="#"
+          href="index.html#about"
           >About</a
         >
         <a
           class="font-manrope font-light tracking-tighter text-neutral-400 hover:text-neutral-50 transition-colors duration-500"
-          href="#"
+          href="index.html#contact"
           >Contact</a
         >
       </div>
-      <button class="md:hidden text-white">
-        <span class="material-symbols-outlined">menu</span>
-      </button>
+      <div class="md:hidden">
+        <button id="menu-btn" class="text-primary">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
     </nav>
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="fixed top-0 left-0 w-full h-screen bg-black/80 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-10 text-center transform -translate-y-full transition-transform duration-500 md:hidden"
+    >
+      <a href="index.html#home" class="text-white text-2xl tracking-widest"
+        >Home</a
+      >
+      <a href="index.html#gallery" class="text-white text-2xl tracking-widest"
+        >Gallery</a
+      >
+      <a href="index.html#about" class="text-white text-2xl tracking-widest"
+        >About</a
+      >
+      <a href="index.html#contact" class="text-white text-2xl tracking-widest"
+        >Contact</a
+      >
+
+      <button id="close-menu" class="mt-10 text-neutral-400">
+        <span class="material-symbols-outlined text-3xl">close</span>
+      </button>
+    </div>
     <main class="pt-32 pb-24">
-      <!-- Hero Title Section -->
+      <!-- HERO -->
       <header class="px-8 mb-24 max-w-7xl mx-auto">
         <div
           class="flex flex-col md:flex-row md:items-end justify-between gap-8"
@@ -156,8 +180,9 @@
           <div>
             <span
               class="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant mb-4 block"
-              >Archive 2024</span
             >
+              All Time Archive
+            </span>
             <h1
               class="font-headline text-5xl md:text-8xl font-light tracking-tighter text-primary leading-none"
             >
@@ -168,14 +193,13 @@
             <p
               class="font-body text-on-surface-variant text-sm leading-relaxed"
             >
-              A curated selection of visual narratives, capturing the tension
-              between light and shadow across urban landscapes and intimate
-              portraits.
+              A curated selection of visual narratives...
             </p>
           </div>
         </div>
       </header>
-      <!-- Category Filter Bar -->
+
+      <!-- FILTER -->
       <section class="px-8 mb-16 max-w-7xl mx-auto">
         <div
           class="flex flex-wrap gap-8 items-center border-b border-outline-variant/15 pb-8"
@@ -186,250 +210,117 @@
             All Works
           </button>
           <button
-            class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-500"
+            class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
           >
             Landscape
           </button>
           <button
-            class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-500"
+            class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
           >
             Portrait
           </button>
           <button
-            class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-500"
+            class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
           >
             Street
           </button>
           <button
-            class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-500"
+            class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
           >
             Urban
           </button>
         </div>
       </section>
-      <!-- Gallery Grid (Asymmetric) -->
+
+      <!-- MASONRY GRID -->
       <section class="px-8 max-w-[1600px] mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-y-32 md:gap-x-12">
-          <!-- Large Featured Image -->
-          <div class="md:col-span-8 group cursor-none">
-            <div
-              class="relative overflow-hidden aspect-[16/9] bg-surface-container"
-            >
-              <img
-                class="w-full h-full object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-105"
-                data-alt="Cinematic night cityscape with neon blue lighting"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_eY1P6p7x64dajnsfPD6w0N0CL8az7vrqH8JOrSScr6cuQuTYUi9QgEqRr_P_PJfidBKBrKVzTGxcAWO-drWzUBLd6abjJ5jrZWeOL5uR9MUq5SgPRIO7QjEQyiffaIELQzSlrZ_bJRrZyy6Ld5TplNx3ggm6lmoiDctJM3c1B5k88YxxBZ_Ng0p47IHlWtsOfHwJyq4oGvgVQO-An0ar0n4ghEHqF-c0_CHm36LoQPnMMGNeUxtnrc5EmXfLz5KTp_di3ptl7hTv"
-              />
-              <div
-                class="absolute bottom-6 right-6 backdrop-blur-md bg-black/20 px-4 py-2 border border-white/5"
-              >
-                <span
-                  class="font-label text-[9px] text-on-surface uppercase tracking-widest"
-                  >35mm • f/1.8 • ISO 400</span
-                >
-              </div>
-              <div
-                class="absolute inset-0 bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-center justify-center"
-              >
-                <span
-                  class="material-symbols-outlined text-white text-4xl font-extralight"
-                  >fullscreen</span
-                >
-              </div>
-            </div>
-            <div class="mt-6 flex justify-between items-start">
-              <h3 class="font-headline text-xl font-light text-primary">
-                NIGHT CALL
-              </h3>
-              <span
-                class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest"
-                >Urban / Tokyo</span
-              >
-            </div>
-          </div>
-          <!-- Vertical Asymmetric Pair -->
-          <div class="md:col-span-4 mt-0 md:mt-24 group cursor-none">
-            <div
-              class="relative overflow-hidden aspect-[4/5] bg-surface-container"
-            >
-              <img
-                class="w-full h-full object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-105"
-                data-alt="Intimate low light portrait with dramatic shadows"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnN1vpsw3vIRDyVclrFPgIdsu0M-D1bUGV-oHgw5hw98GtN_HQu--HRpzCqkH5S46XIEhNbRlKw4tKyhhHOyuBxiRPk9Bto15oigeP9zAeQBKg77ag5hahm185ybbFgtXuLNDwcQyqxI_cmWG78bYSbMPGuQ6k2kB17dWCnRMx0U-fKkw8WINPX3Z4uJnVnwa0lUAgh3pCB9xMAL5lNoGLPAs1rrDocwmcfyJKWQDonRzTzcf-CWQVnHOo_PTTa9RNF0zCCY1j3ueG"
-              />
-              <div
-                class="absolute inset-0 bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-center justify-center"
-              >
-                <span
-                  class="material-symbols-outlined text-white text-4xl font-extralight"
-                  >fullscreen</span
-                >
-              </div>
-            </div>
-            <div class="mt-6">
-              <h3 class="font-headline text-xl font-light text-primary">
-                SILENT GAZE
-              </h3>
-              <span
-                class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest"
-                >Portrait / Studio</span
-              >
-            </div>
-          </div>
-          <!-- Three Column Row -->
-          <div class="md:col-span-4 group cursor-none">
-            <div
-              class="relative overflow-hidden aspect-square bg-surface-container"
-            >
-              <img
-                class="w-full h-full object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-105"
-                data-alt="Minimalist misty mountain landscape at dawn"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCc4fh60aHAMNRjrHDdDvCQSVKxBp4TDVEQks0ZW0KJsZPyjQhVyAYwoDPbeQ5kaYSwH6fpwoA9RbLV-EpNThYoWzjOVkCSxstXcsMzwFMpMkwSx6PfHu4jxwcvjg2VaRsu2HLocvb-ITsdS-Sk66o4WtJVna6kKjQg_yXyQancxdUyBdW0sUTKwQR8T2PsZUv45-ffzXd_v7EFYcFI-RB7Ui88WaKThIVEVSBw0FCiSXV49XpJv42su5xSoGP0APiRx6Oo9MqqO9sz"
-              />
-              <div
-                class="absolute inset-0 bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-center justify-center"
-              >
-                <span
-                  class="material-symbols-outlined text-white text-4xl font-extralight"
-                  >fullscreen</span
-                >
-              </div>
-            </div>
-            <div class="mt-6">
-              <h3 class="font-headline text-xl font-light text-primary">
-                THE VOID
-              </h3>
-              <span
-                class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest"
-                >Landscape / Alps</span
-              >
-            </div>
-          </div>
-          <div class="md:col-span-4 group cursor-none md:mt-[-80px]">
-            <div
-              class="relative overflow-hidden aspect-square bg-surface-container"
-            >
-              <img
-                class="w-full h-full object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-105"
-                data-alt="Abstract architectural lines of a skyscraper"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8Dz7FPRdJvE33gutu9rED0Zze6ZSwOdBNQKtZ3lJfy0XgJtKTI0qY_TLfP5PGR6zfqobBJVlk9MiZkyQwz7Ge-QfGStCYD_FgBwNYUUMye8i1m3lSHcul6Pl21pC09AvGUXuw7WUpk1DX1llrQDySSxeSlxGpHxZzwqVTXPUptPHeyxALTckUh3FMLCCHtvSFx0RacEHoJRkzHxQcpeoJXB944oTShVLWHFYC_RKUpgO16AG20IcjjvV3HCIwb10bsAc22ca3iTGJ"
-              />
-              <div
-                class="absolute inset-0 bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-center justify-center"
-              >
-                <span
-                  class="material-symbols-outlined text-white text-4xl font-extralight"
-                  >fullscreen</span
-                >
-              </div>
-            </div>
-            <div class="mt-6">
-              <h3 class="font-headline text-xl font-light text-primary">
-                GEOMETRY
-              </h3>
-              <span
-                class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest"
-                >Urban / Chicago</span
-              >
-            </div>
-          </div>
-          <div class="md:col-span-4 group cursor-none">
-            <div
-              class="relative overflow-hidden aspect-square bg-surface-container"
-            >
-              <img
-                class="w-full h-full object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-105"
-                data-alt="Brutalist concrete building details in shadow"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRhHlbGqvE-E9oVVH1hdtcvTEuvKPs0dxTyRsHIbS21uPktGXq9cXFpYm6uxeW4Q22W59zncKG_FINsjQCxiLEaoUWaIuOdkBK1An5lL_Ow2ZOH8XYcSIh-h46mLJ5xXZxmr_MaSY1HQrrRwJ_WPpHnMIZfVijfP7g60h7h526v3eutnr1_MkEwEPnMLOddG6lcbuH6jKX773y0_3uUS4fBS9yvzj4tllvVaTWrFGHWR3YucvXQfy7IxAX3HPZ7r-UkvKpUgOATvyt"
-              />
-              <div
-                class="absolute inset-0 bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-center justify-center"
-              >
-                <span
-                  class="material-symbols-outlined text-white text-4xl font-extralight"
-                  >fullscreen</span
-                >
-              </div>
-            </div>
-            <div class="mt-6">
-              <h3 class="font-headline text-xl font-light text-primary">
-                BRUTALIST
-              </h3>
-              <span
-                class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest"
-                >Street / Berlin</span
-              >
-            </div>
-          </div>
-          <!-- Wide Panoramic Break -->
-          <div class="md:col-span-12 group cursor-none py-12">
-            <div
-              class="relative overflow-hidden aspect-[21/9] bg-surface-container"
-            >
-              <img
-                class="w-full h-full object-cover transition-transform duration-[2500ms] ease-out group-hover:scale-110"
-                data-alt="Wide shot of the Golden Gate bridge in fog"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUPb6tn5Dpz-7MpeAngn0ike9EgP9RDSBX_AXcVfBsPuHK8YFdMMOb4GB1MqpBxrfrIUJqmi7KJsUJ5Xx2t9IIZvreQTH0jAYj-2_2bnFoBhTd_EMhAweDclH2aGOiwbWduYwhvFgswsyK-6O-_fQoA56P5eIZ1IDVR2xeEiuvJSJfed1Ean9bR84N92EVCo5otcgVUw9JyyViWkrDFnJ80lDMwDDdZTGsLvSFYOSzJPexsIGNXUJuS4jXjO1bO41bccyZQrD0S4ne"
-              />
-              <div
-                class="absolute inset-0 bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-center justify-center"
-              >
-                <span
-                  class="material-symbols-outlined text-white text-5xl font-extralight"
-                  >fullscreen</span
-                >
-              </div>
-            </div>
-            <div class="mt-8 text-center">
-              <h3
-                class="font-headline text-3xl font-light text-primary tracking-tight"
-              >
-                LIMITLESS HORIZON
-              </h3>
-              <p
-                class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.4em] mt-2"
-              >
-                Landscape / San Francisco
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Load More Section -->
-      <section class="flex justify-center py-32">
-        <button
-          class="px-12 py-4 border border-outline-variant/30 hover:bg-white hover:text-black transition-all duration-700 group"
-        >
-          <span class="font-label text-[11px] uppercase tracking-widest"
-            >Load Archive</span
-          >
-        </button>
+        <div
+          id="gallery"
+          class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6"
+        ></div>
       </section>
     </main>
+    <!-- SCRIPT -->
+    <script>
+      const imageList = [
+        "assets/DSC03273.JPG",
+        "assets/DSC03450.JPG",
+        "assets/DSC03468.JPG",
+        "assets/DSC03590.JPG",
+        "assets/DSC03591.JPG",
+        "assets/DSC03462.JPG",
+        "assets/DSC07025.JPG",
+        "assets/DSC06866.JPG",
+        "assets/1733365554822.JPG",
+        "assets/WhatsApp Image 2026-04-03 at 20.02.08.jpeg",
+        "assets/WhatsApp Image 2026-04-03 at 20.02.10 (1).jpeg",
+        "assets/WhatsApp Image 2026-04-03 at 20.02.10.jpeg",
+        "assets/WhatsApp Image 2026-04-03 at 20.02.11.jpeg",
+        "assets/WhatsApp Image 2026-04-03 at 20.02.11 (1).jpeg",
+        "assets/WhatsApp Image 2026-04-03 at 20.02.15.jpeg",
+      ];
+
+      const gallery = document.getElementById("gallery");
+
+      function getAspectRatio(width, height) {
+        const ratio = width / height;
+
+        if (ratio > 1.6) return "16/9";
+        if (ratio > 1.2) return "4/3";
+        return "1/1";
+      }
+
+      function getAspectClass(ratio) {
+        if (ratio === "1/1") return "aspect-square";
+        return `aspect-[${ratio}]`;
+      }
+
+      imageList.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+
+        img.onload = function () {
+          const ratio = getAspectRatio(img.naturalWidth, img.naturalHeight);
+
+          const item = document.createElement("div");
+          item.className = "break-inside-avoid group overflow-hidden relative";
+
+          item.innerHTML = `
+        <div class="${getAspectClass(ratio)}">
+          <img
+            src="${src}"
+            loading="lazy"
+            class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
+          />
+        </div>
+        <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition"></div>
+      `;
+
+          gallery.appendChild(item);
+        };
+      });
+    </script>
     <!-- Footer -->
     <footer
-      class="bg-neutral-900 dark:bg-[#0E0E0E] flex flex-col items-center justify-center space-y-8 w-full py-24 border-t border-outline-variant/10"
+      class="bg-neutral-900 dark:bg-[#0E0E0E] py-24 flex flex-col items-center justify-center space-y-8 w-full"
     >
       <div
-        class="text-neutral-50 font-bold font-headline text-2xl tracking-[0.2em]"
+        class="text-neutral-50 font-bold tracking-[0.2em] font-headline text-xl"
       >
-        GALLERY
+        SOCIALS
       </div>
-      <div class="flex space-x-12">
+      <div class="flex flex-wrap justify-center gap-8 md:gap-12">
         <a
           class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 hover:text-neutral-50 transition-colors duration-300"
-          href="#"
+          href="https://www.instagram.com/tatta.lens/"
+          target="_blank"
           >Instagram</a
         >
         <a
           class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 hover:text-neutral-50 transition-colors duration-300"
-          href="#"
-          >Behance</a
-        >
-        <a
-          class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 hover:text-neutral-50 transition-colors duration-300"
-          href="#"
-          >Twitter</a
+          href="https://www.youtube.com/@livilingiblin"
+          target="_blank"
+          >Youtube</a
         >
         <a
           class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 hover:text-neutral-50 transition-colors duration-300"
@@ -437,11 +328,14 @@
           >Back to Top</a
         >
       </div>
-      <p
-        class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 opacity-50"
+      <div
+        class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 pt-8 opacity-50 text-center md:text-left"
       >
-        © 2024 THE CINEMATIC GALLERY. ALL RIGHTS RESERVED.
-      </p>
+        <span class="block md:inline"> © 2026 TATTA'S LENS </span>
+        <span class="block md:inline md:ml-2">
+          - The Cinematic Gallery. Created & Designed.
+        </span>
+      </div>
     </footer>
     <!-- Custom Cursor Overlay (Visual Element only) -->
     <div
@@ -450,5 +344,25 @@
     >
       <div class="w-4 h-4 bg-white rounded-full"></div>
     </div>
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const closeMenu = document.getElementById("close-menu");
+
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.remove("-translate-y-full");
+      });
+
+      closeMenu.addEventListener("click", () => {
+        mobileMenu.classList.add("-translate-y-full");
+      });
+
+      // auto close saat klik link
+      document.querySelectorAll("#mobile-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("-translate-y-full");
+        });
+      });
+    </script>
   </body>
 </html>
