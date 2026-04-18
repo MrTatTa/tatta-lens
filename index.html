@@ -117,6 +117,7 @@
   </head>
   <body
     class="bg-surface-container-lowest text-on-surface font-body selection:bg-primary selection:text-on-primary"
+    oncontextmenu="return false;"
   >
     <!-- TopNavBar -->
     <nav
@@ -227,106 +228,7 @@
           </div>
         </div>
         <!-- Asymmetric Bento Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
-          <!-- Large Item -->
-          <div
-            class="md:col-span-8 group relative aspect-[4/3] overflow-hidden bg-surface-container"
-          >
-            <img
-              alt="Urban street photography"
-              class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
-              data-alt="High contrast black and white urban street photography"
-              src="assets/DSC03450.JPG"
-            />
-            <div
-              class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8"
-            >
-              <span
-                class="text-[10px] text-primary mb-2 uppercase tracking-widest"
-                >Indonesia, 2024</span
-              >
-              <h3 class="text-2xl font-headline font-light">DAWNING</h3>
-            </div>
-          </div>
-          <!-- Vertical Item -->
-          <div
-            class="md:col-span-4 group relative aspect-[3/4] overflow-hidden bg-surface-container mt-12 md:mt-0"
-          >
-            <img
-              alt="Paris city architecture"
-              class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
-              data-alt="Moody architecture shot of Paris streets in evening light"
-              src="assets/DSC03591.JPG"
-            />
-            <div
-              class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8"
-            >
-              <span
-                class="text-[10px] text-primary mb-2 uppercase tracking-widest"
-                >Indonesia, 2024</span
-              >
-              <h3 class="text-2xl font-headline font-light">LIGHT GAZING</h3>
-            </div>
-          </div>
-          <!-- Small Items Row -->
-          <div
-            class="md:col-span-4 group relative aspect-square overflow-hidden bg-surface-container"
-          >
-            <img
-              alt="Mountain landscape"
-              class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
-              data-alt="Rugged mountain peak shrouded in atmospheric clouds"
-              src="assets/DSC03468.JPG"
-            />
-            <div
-              class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8"
-            >
-              <span
-                class="text-[10px] text-primary mb-2 uppercase tracking-widest"
-                >Indonesia, 2024</span
-              >
-              <h3 class="text-2xl font-headline font-light">NATURE'S FALL</h3>
-            </div>
-          </div>
-          <div
-            class="md:col-span-4 group relative aspect-square overflow-hidden bg-surface-container"
-          >
-            <img
-              alt="Forest details"
-              class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
-              data-alt="Deep forest foliage with beams of sunlight filtering through"
-              src="assets/DSC03590.JPG"
-            />
-            <div
-              class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8"
-            >
-              <span
-                class="text-[10px] text-primary mb-2 uppercase tracking-widest"
-                >Indonesia, 2024</span
-              >
-              <h3 class="text-2xl font-headline font-light">MIND ECHOES</h3>
-            </div>
-          </div>
-          <div
-            class="md:col-span-4 group relative aspect-square overflow-hidden bg-surface-container"
-          >
-            <img
-              alt="Minimalist architecture"
-              class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
-              data-alt="Abstract minimalist architecture detail with sharp shadows"
-              src="assets/DSC03273.JPG"
-            />
-            <div
-              class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8"
-            >
-              <span
-                class="text-[10px] text-primary mb-2 uppercase tracking-widest"
-                >Indonesia, 2024</span
-              >
-              <h3 class="text-2xl font-headline font-light">SHORE JOURNEY</h3>
-            </div>
-          </div>
-        </div>
+        <div id="featured" class="columns-1 md:columns-3 gap-8 space-y-8"></div>
         <div class="mt-24 flex justify-center">
           <a
             href="gallery.html"
@@ -433,7 +335,7 @@
       <div class="flex flex-wrap justify-center gap-8 md:gap-12">
         <a
           class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 hover:text-neutral-50 transition-colors duration-300"
-          href="https://www.instagram.com/tatta.lens/"
+          href="https://www.instagram.com/amboy.ricarica_/"
           target="_blank"
           >Instagram</a
         >
@@ -452,9 +354,9 @@
       <div
         class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 pt-8 opacity-50 text-center md:text-left"
       >
-        <span class="block md:inline"> © 2026 TATTA'S LENS </span>
+        <span class="block md:inline"> © 2026 TATTA'S LENS. All images are protected by copyright.</span>
         <span class="block md:inline md:ml-2">
-          - The Cinematic Gallery. Created & Designed.
+        The Cinematic Gallery. Created & Designed.
         </span>
       </div>
     </footer>
@@ -488,6 +390,67 @@
         </div>
       </div>
     </div>
+    <script>
+      function shuffle(array) {
+        return array.sort(() => Math.random() - 0.5);
+      }
+
+      fetch("gallery.json")
+        .then((res) => res.json())
+        .then((data) => {
+          const container = document.getElementById("featured");
+
+          // flatten semua kategori jadi 1 array
+          let allImages = [];
+          Object.values(data).forEach((arr) => {
+            allImages.push(...arr);
+          });
+
+          // random
+          const selected = shuffle(allImages).slice(0, 7);
+
+          // layout pattern (bento)
+          const layouts = [
+            "md:col-span-8 aspect-[4/3]",
+            "md:col-span-4 aspect-[3/4]",
+            "md:col-span-4 aspect-square",
+            "md:col-span-4 aspect-square",
+            "md:col-span-4 aspect-square",
+          ];
+
+          selected.forEach((src, i) => {
+            const img = new Image();
+            img.src = src;
+
+            img.onload = () => {
+              const isPortrait = img.height > img.width;
+
+              const item = document.createElement("div");
+
+              // dynamic aspect
+              let aspectClass = isPortrait ? "aspect-[3/4]" : "aspect-[4/3]";
+
+              item.className = `
+      md:col-span-${i === 0 ? "8" : "4"}
+      ${aspectClass}
+      group relative overflow-hidden bg-surface-container
+    `;
+
+              item.innerHTML = `
+      <img
+        src="${src}"
+        class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+      />
+      <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-end p-6">
+        <h3 class="text-xl font-headline font-light">Featured</h3>
+      </div>
+    `;
+
+              container.appendChild(item);
+            };
+          });
+        });
+    </script>
     <script>
       const sections = document.querySelectorAll("section[id]");
       const navLinks = document.querySelectorAll("nav a");

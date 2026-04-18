@@ -112,7 +112,10 @@
       }
     </style>
   </head>
-  <body class="font-body selection:bg-primary selection:text-on-primary">
+  <body
+    class="font-body selection:bg-primary selection:text-on-primary"
+    oncontextmenu="return false;"
+  >
     <!-- TopNavBar -->
     <nav
       class="fixed top-0 w-full z-50 bg-transparent dark:bg-neutral-950/60 backdrop-blur-xl flex justify-between items-center px-8 py-6 w-full"
@@ -224,12 +227,12 @@
           <button
             class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
           >
-            Street
+            .Feast
           </button>
           <button
             class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
           >
-            Urban
+            The Lantis
           </button>
         </div>
       </section>
@@ -244,42 +247,11 @@
     </main>
     <!-- SCRIPT -->
     <script>
-      const imageList = [
-        "assets/DSC03273.JPG",
-        "assets/DSC03450.JPG",
-        "assets/DSC03468.JPG",
-        "assets/DSC03590.JPG",
-        "assets/DSC03591.JPG",
-        "assets/DSC03462.JPG",
-        "assets/DSC07025.JPG",
-        "assets/DSC06866.JPG",
-        "assets/1733365554822.JPG",
-        "assets/WhatsApp Image 2026-04-03 at 20.02.08.jpeg",
-        "assets/WhatsApp Image 2026-04-03 at 20.02.10 (1).jpeg",
-        "assets/WhatsApp Image 2026-04-03 at 20.02.10.jpeg",
-        "assets/WhatsApp Image 2026-04-03 at 20.02.11.jpeg",
-        "assets/WhatsApp Image 2026-04-03 at 20.02.11 (1).jpeg",
-        "assets/WhatsApp Image 2026-04-03 at 20.02.15.jpeg",
-        "assets/1.JPG",
-        "assets/2.JPG",
-        "assets/3.JPG",
-        "assets/4.JPG",
-        "assets/5.JPG",
-        "assets/7.JPG",
-        "assets/12.JPG",
-        "assets/14.JPG",
-        "assets/21.JPG",
-        "assets/23.JPG",
-        "assets/36.JPG",
-        "assets/41.JPG",
-        "assets/42.JPG",
-      ];
-
+      document.addEventListener("dragstart", (e) => e.preventDefault());
       const gallery = document.getElementById("gallery");
 
       function getAspectRatio(width, height) {
         const ratio = width / height;
-
         if (ratio > 1.6) return "16/9";
         if (ratio > 1.2) return "4/3";
         return "1/1";
@@ -290,29 +262,68 @@
         return `aspect-[${ratio}]`;
       }
 
-      imageList.forEach((src) => {
-        const img = new Image();
-        img.src = src;
+      // FETCH DATA
+      fetch("gallery.json")
+        .then((res) => res.json())
+        .then((data) => {
+          Object.entries(data).forEach(([category, images]) => {
+            images.forEach((src) => {
+              const img = new Image();
+              img.src = src;
 
-        img.onload = function () {
-          const ratio = getAspectRatio(img.naturalWidth, img.naturalHeight);
+              img.onload = function () {
+                const ratio = getAspectRatio(
+                  img.naturalWidth,
+                  img.naturalHeight,
+                );
 
-          const item = document.createElement("div");
-          item.className = "break-inside-avoid group overflow-hidden relative";
+                const item = document.createElement("div");
+                item.className =
+                  "break-inside-avoid group overflow-hidden relative";
+                item.setAttribute("data-category", category);
 
-          item.innerHTML = `
-        <div class="${getAspectClass(ratio)}">
-          <img
-            src="${src}"
-            loading="lazy"
-            class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
-          />
-        </div>
-        <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition"></div>
-      `;
+                item.innerHTML = `
+            <div class="${getAspectClass(ratio)}">
+              <img
+                src="${src}"
+                loading="lazy"
+                class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
+              />
+              <div class="absolute inset-0"></div>
+            </div>
+            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition"></div>
+          `;
 
-          gallery.appendChild(item);
-        };
+                gallery.appendChild(item);
+              };
+            });
+          });
+        })
+        .catch((err) => console.error("JSON error:", err));
+
+      // FILTER
+      const filterButtons = document.querySelectorAll("section button");
+
+      filterButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const filter = btn.innerText.toLowerCase();
+
+          document.querySelectorAll("#gallery > div").forEach((item) => {
+            const category = item.getAttribute("data-category");
+
+            if (filter === "all works" || category === filter) {
+              item.style.display = "block";
+            } else {
+              item.style.display = "none";
+            }
+          });
+
+          // active state
+          filterButtons.forEach((b) =>
+            b.classList.remove("text-primary", "border-b", "border-primary"),
+          );
+          btn.classList.add("text-primary", "border-b", "border-primary");
+        });
       });
     </script>
     <!-- Footer -->
@@ -346,9 +357,9 @@
       <div
         class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 pt-8 opacity-50 text-center md:text-left"
       >
-        <span class="block md:inline"> © 2026 TATTA'S LENS </span>
+        <span class="block md:inline"> © 2026 TATTA'S LENS. All images are protected by copyright.</span>
         <span class="block md:inline md:ml-2">
-          - The Cinematic Gallery. Created & Designed.
+        The Cinematic Gallery. Created & Designed.
         </span>
       </div>
     </footer>
