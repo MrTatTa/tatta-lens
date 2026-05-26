@@ -210,31 +210,37 @@
           class="flex flex-wrap gap-8 items-center border-b border-outline-variant/15 pb-8"
         >
           <button
+            data-filter="all works"
             class="font-label text-[11px] uppercase tracking-widest text-primary border-b border-primary pb-1"
           >
             All Works
           </button>
           <button
+            data-filter="landscape"
             class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
           >
             Landscape
           </button>
           <button
+            data-filter="portrait"
             class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
           >
             Portrait
           </button>
           <button
+            data-filter=".feast"
             class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
           >
             .Feast
           </button>
           <button
+            data-filter="the lantis"
             class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
           >
             The Lantis
           </button>
           <button
+            data-filter="hindia"
             class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
           >
             Hindia
@@ -248,85 +254,145 @@
           id="gallery"
           class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6"
         ></div>
+
+        <!-- LOAD MORE -->
+        <div class="flex justify-center mt-16">
+          <button
+            id="loadMoreBtn"
+            class="px-8 py-3 border border-white/20 text-sm uppercase tracking-[0.2em] text-white hover:bg-white hover:text-black transition duration-300"
+          >
+            Load More
+          </button>
+        </div>
       </section>
     </main>
     <!-- SCRIPT -->
     <script>
       document.addEventListener("dragstart", (e) => e.preventDefault());
+
       const gallery = document.getElementById("gallery");
+      const loadMoreBtn = document.getElementById("loadMoreBtn");
+
+      const ITEMS_PER_LOAD = 20;
+
+      let allImages = [];
+      let currentIndex = 0;
+      let currentFilter = "all works";
 
       function getAspectRatio(width, height) {
         const ratio = width / height;
+
         if (ratio > 1.6) return "16/9";
         if (ratio > 1.2) return "4/3";
+
         return "1/1";
       }
 
       function getAspectClass(ratio) {
         if (ratio === "1/1") return "aspect-square";
+
         return `aspect-[${ratio}]`;
       }
 
-      // FETCH DATA
+      function createGalleryItem(src, category) {
+        const img = new Image();
+        img.src = src;
+
+        img.onload = function () {
+          const ratio = getAspectRatio(img.naturalWidth, img.naturalHeight);
+
+          const item = document.createElement("div");
+
+          item.className = "break-inside-avoid group overflow-hidden relative";
+
+          item.setAttribute("data-category", category);
+
+          item.innerHTML = `
+        <div class="${getAspectClass(ratio)}">
+          <img
+            src="${src}"
+            loading="lazy"
+            class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
+          />
+
+          <div class="absolute inset-0"></div>
+        </div>
+
+        <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition"></div>
+      `;
+
+          gallery.appendChild(item);
+        };
+      }
+
+      function renderImages(reset = false) {
+        if (reset) {
+          gallery.innerHTML = "";
+          currentIndex = 0;
+        }
+
+        const filteredImages =
+          currentFilter === "all works"
+            ? allImages
+            : allImages.filter(
+                (item) => item.category.toLowerCase() === currentFilter,
+              );
+
+        const nextItems = filteredImages.slice(
+          currentIndex,
+          currentIndex + ITEMS_PER_LOAD,
+        );
+
+        nextItems.forEach((item) => {
+          createGalleryItem(item.src, item.category);
+        });
+
+        currentIndex += ITEMS_PER_LOAD;
+
+        // hide tombol kalau semua udah tampil
+        if (currentIndex >= filteredImages.length) {
+          loadMoreBtn.style.display = "none";
+        } else {
+          loadMoreBtn.style.display = "inline-block";
+        }
+      }
+
+      // FETCH JSON
       fetch("gallery.json")
         .then((res) => res.json())
         .then((data) => {
           Object.entries(data).forEach(([category, images]) => {
             images.forEach((src) => {
-              const img = new Image();
-              img.src = src;
-
-              img.onload = function () {
-                const ratio = getAspectRatio(
-                  img.naturalWidth,
-                  img.naturalHeight,
-                );
-
-                const item = document.createElement("div");
-                item.className =
-                  "break-inside-avoid group overflow-hidden relative";
-                item.setAttribute("data-category", category);
-
-                item.innerHTML = `
-            <div class="${getAspectClass(ratio)}">
-              <img
-                src="${src}"
-                loading="lazy"
-                class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
-              />
-              <div class="absolute inset-0"></div>
-            </div>
-            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition"></div>
-          `;
-
-                gallery.appendChild(item);
-              };
+              allImages.push({
+                src,
+                category,
+              });
             });
           });
+
+          renderImages();
         })
         .catch((err) => console.error("JSON error:", err));
 
+      // LOAD MORE
+      loadMoreBtn.addEventListener("click", () => {
+        renderImages();
+      });
+
       // FILTER
-      const filterButtons = document.querySelectorAll("section button");
+      const filterButtons = document.querySelectorAll("[data-filter]");
 
       filterButtons.forEach((btn) => {
         btn.addEventListener("click", () => {
-          const filter = btn.innerText.toLowerCase();
+          currentFilter = btn.dataset.filter;
 
-          document.querySelectorAll("#gallery > div").forEach((item) => {
-            const category = item.getAttribute("data-category");
-
-            if (filter === "all works" || category === filter) {
-              item.style.display = "block";
-            } else {
-              item.style.display = "none";
-            }
-          });
+          renderImages(true);
 
           // active state
           filterButtons.forEach((b) =>
             b.classList.remove("text-primary", "border-b", "border-primary"),
           );
+
           btn.classList.add("text-primary", "border-b", "border-primary");
         });
       });
