@@ -113,12 +113,341 @@
       html {
         scroll-behavior: smooth;
       }
+      @keyframes kenburns {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(1.08);
+        }
+      }
+
+      .hero-bg {
+        animation: kenburns 15s ease-in-out infinite alternate;
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-title {
+        animation: fadeUp 1.2s ease forwards;
+      }
+
+      .hero-subtitle {
+        opacity: 0;
+        animation: fadeUp 1.2s ease forwards;
+        animation-delay: 0.4s;
+      }
+      nav {
+        transition: all 0.5s ease;
+      }
+      .gallery-card img {
+        transition:
+          transform 0.8s ease,
+          filter 0.8s ease;
+      }
+
+      .gallery-card:hover img {
+        transform: scale(1.08);
+      }
+      .gallery-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        opacity: 0;
+        transition: 0.6s;
+      }
+
+      .gallery-card:hover::after {
+        opacity: 1;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(80px);
+        transition:
+          opacity 1s ease,
+          transform 1s ease;
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* Cursor custom */
+      * {
+        cursor: crosshair;
+      }
+      a,
+      button {
+        cursor: pointer;
+      }
+
+      /* Nav link underline animasi dari kiri */
+      nav a {
+        position: relative;
+      }
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0%;
+        height: 1px;
+        background: #fff;
+        transition: width 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      /* Magnetic hover pada tombol utama */
+      .btn-magnetic {
+        transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      /* Teks heading dengan clip reveal */
+      .text-reveal-wrap {
+        overflow: hidden;
+        display: block;
+      }
+      .text-reveal-inner {
+        display: block;
+        transform: translateY(100%);
+        transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+      .text-reveal-inner.visible {
+        transform: translateY(0%);
+      }
+
+      /* Gallery card — overlay shimmer */
+      .gallery-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          120deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.04) 50%,
+          transparent 70%
+        );
+        transform: translateX(-100%);
+        transition: transform 0.8s ease;
+        z-index: 2;
+      }
+      .gallery-card:hover::before {
+        transform: translateX(100%);
+      }
+
+      /* Stagger fade untuk gallery item */
+      @keyframes staggerFade {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .gallery-item-anim {
+        animation: staggerFade 0.8s ease forwards;
+        opacity: 0;
+      }
+
+      /* Smooth underline link (email di contact) */
+      section a {
+        background-image: linear-gradient(currentColor, currentColor);
+        background-size: 0% 1px;
+        background-repeat: no-repeat;
+        background-position: left bottom;
+        transition: background-size 0.5s ease;
+      }
+      section a:hover {
+        background-size: 100% 1px;
+      }
+
+      /* Page load curtain */
+      #page-curtain {
+        position: fixed;
+        inset: 0;
+        background: #0e0e0e;
+        z-index: 9999;
+        transform-origin: top;
+        transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+      #page-curtain.open {
+        transform: scaleY(0);
+      }
+
+      /* Parallax mouse untuk hero */
+      .hero-mouse-layer {
+        transition: transform 0.1s linear;
+        will-change: transform;
+      }
+
+      /* About image — scanline effect on hover */
+      #about .overflow-hidden:hover img {
+        filter: grayscale(0%);
+      }
+
+      /* Floating HUD pulse */
+      @keyframes hudPulse {
+        0%,
+        100% {
+          opacity: 0.4;
+        }
+        50% {
+          opacity: 0.7;
+        }
+      }
+      .fixed.bottom-8.left-8 {
+        animation: hudPulse 4s ease-in-out infinite;
+      }
+
+      /* Footer link hover slide up */
+      footer a {
+        display: inline-block;
+        transition:
+          transform 0.3s ease,
+          color 0.3s ease;
+      }
+      footer a:hover {
+        transform: translateY(-3px);
+      }
+      .hero-blend {
+        background: linear-gradient(
+          to bottom,
+          transparent 0%,
+          rgba(19, 19, 19, 0.6) 60%,
+          rgba(19, 19, 19, 1) 100%
+        );
+        pointer-events: none;
+      }
+      /* Blend antara Gallery (#131313) → About (#1c1b1b) */
+      .blend-top-about {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 120px;
+        background: linear-gradient(to bottom, #131313, transparent);
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* Blend bawah About → Contact */
+      .blend-bottom-about {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 120px;
+        background: linear-gradient(to bottom, transparent, #131313);
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* Blend atas Gallery (dari hero ke gallery) */
+      .blend-top-gallery {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 120px;
+        background: linear-gradient(to bottom, #131313, transparent);
+        pointer-events: none;
+        z-index: 1;
+      }
+      /* Skeleton shimmer untuk featured gallery */
+      @keyframes skeletonShimmer {
+        0% {
+          background-position: -400px 0;
+        }
+        100% {
+          background-position: 400px 0;
+        }
+      }
+
+      .skeleton {
+        background: linear-gradient(
+          90deg,
+          #1a1a1a 25%,
+          #2a2a2a 50%,
+          #1a1a1a 75%
+        );
+        background-size: 800px 100%;
+        animation: skeletonShimmer 1.4s ease-in-out infinite;
+      }
+
+      /* Foto fade in smooth */
+      .feat-img {
+        opacity: 0;
+        filter: grayscale(100%);
+        transform: scale(1.04);
+        transition:
+          opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+          filter 0.8s ease;
+      }
+      .feat-img.loaded {
+        opacity: 1;
+        transform: scale(1);
+        filter: grayscale(100%);
+      }
+      .group:hover .feat-img {
+        filter: grayscale(0%);
+        transform: scale(1.05);
+      }
+
+      .skeleton-layer {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        transition: opacity 0.6s ease;
+      }
+      .skeleton-layer.hidden-skeleton {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Custom cursor crosshair tetap tapi lebih premium */
+      * {
+        cursor: crosshair;
+      }
+      a,
+      button {
+        cursor: pointer;
+      }
+
+      /* Grayscale hover transition yang smooth */
+      .feat-img {
+        filter: grayscale(100%);
+      }
+      .feat-img.loaded {
+        filter: grayscale(100%);
+        transition:
+          opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+          filter 0.8s ease;
+      }
+      .group:hover .feat-img {
+        filter: grayscale(0%);
+      }
     </style>
   </head>
   <body
     class="bg-surface-container-lowest text-on-surface font-body selection:bg-primary selection:text-on-primary"
     oncontextmenu="return false;"
   >
+    <div id="page-curtain"></div>
     <!-- TopNavBar -->
     <nav
       class="fixed top-0 w-full z-50 bg-transparent dark:bg-neutral-950/60 backdrop-blur-xl flex justify-between items-center px-8 py-6 w-full"
@@ -188,10 +517,19 @@
         <h1
           class="font-headline font-light text-5xl md:text-8xl lg:text-9xl tracking-[0.15em] text-primary mb-6"
         >
-          THE CINEMATIC GALLERY
+          <span class="text-reveal-wrap"
+            ><span class="text-reveal-inner" id="hero-word-1"
+              >THE CINEMATIC</span
+            ></span
+          >
+          <span class="text-reveal-wrap"
+            ><span class="text-reveal-inner" id="hero-word-2"
+              >GALLERY</span
+            ></span
+          >
         </h1>
         <p
-          class="font-body text-on-surface-variant tracking-[0.4em] uppercase text-xs md:text-sm"
+          class="hero-subtitle font-body text-on-surface-variant tracking-[0.4em] uppercase text-xs md:text-sm"
         >
           Capturing moments, telling stories.
         </p>
@@ -202,9 +540,14 @@
           >keyboard_double_arrow_down</span
         >
       </div>
+      <div class="absolute bottom-0 left-0 w-full h-80 hero-blend z-10"></div>
     </section>
     <!-- Featured Gallery Section -->
-    <section id="gallery" class="scroll-mt-16 bg-surface py-32 px-8 md:px-24">
+    <section
+      id="gallery"
+      class="reveal scroll-mt-16 bg-surface py-32 px-8 md:px-24 relative"
+    >
+      <div class="blend-top-gallery"></div>
       <div class="max-w-7xl mx-auto">
         <div
           class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8"
@@ -228,29 +571,32 @@
           </div>
         </div>
         <!-- Asymmetric Bento Grid -->
-        <div id="featured" class="columns-1 md:columns-3 gap-8 space-y-8"></div>
+        <div id="featured" class="grid grid-cols-12 gap-4 md:gap-6"></div>
         <div class="mt-24 flex justify-center">
           <a
             href="gallery.html"
-            class="px-12 py-5 bg-primary text-on-primary font-headline tracking-widest text-xs uppercase hover:bg-primary-container transition-colors duration-500"
+            class="btn-magnetic px-12 py-5 bg-primary text-on-primary font-headline tracking-widest text-xs uppercase hover:bg-primary-container transition-colors duration-500"
           >
             View Full Gallery
           </a>
         </div>
       </div>
+      <section id="gallery" class="bg-surface"></section>
     </section>
     <!-- About Section -->
     <section
       id="about"
-      class="scroll-mt-16 bg-surface-container-low py-40 px-8"
+      class="reveal scroll-mt-16 bg-surface-container-low py-40 px-8 relative"
     >
+      <div class="blend-top-about"></div>
+      <div class="blend-bottom-about"></div>
       <div
         class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-16 md:gap-32"
       >
         <div class="w-full md:w-1/3 aspect-[3/4] overflow-hidden grayscale">
           <img
             alt="Photographer Portrait"
-            class="w-full h-full object-cover"
+            class="hero-bg w-full h-full object-cover"
             data-alt="Minimalist black and white portrait of a photographer"
             src="img/photo-profile.jpeg"
           />
@@ -294,9 +640,13 @@
           </div>
         </div>
       </div>
+      <section id="about" class="bg-surface-container-low"></section>
     </section>
     <!-- Contact / Social CTA -->
-    <section id="contact" class="scroll-mt-16 bg-surface py-32 text-center">
+    <section
+      id="contact"
+      class="reveal scroll-mt-16 bg-surface py-32 text-center"
+    >
       <div class="max-w-2xl mx-auto px-4">
         <h2
           class="font-headline text-5xl md:text-7xl font-light text-primary mb-12"
@@ -354,9 +704,11 @@
       <div
         class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 pt-8 opacity-50 text-center md:text-left"
       >
-        <span class="block md:inline"> © 2026 TATTA'S LENS. All images are protected by copyright.</span>
+        <span class="block md:inline">
+          © 2026 TATTA'S LENS. All images are protected by copyright.</span
+        >
         <span class="block md:inline md:ml-2">
-        The Cinematic Gallery. Created & Designed.
+          The Cinematic Gallery. Created & Designed.
         </span>
       </div>
     </footer>
@@ -400,54 +752,320 @@
         .then((data) => {
           const container = document.getElementById("featured");
 
-          // flatten semua kategori jadi 1 array
           let allImages = [];
           Object.values(data).forEach((arr) => {
             allImages.push(...arr);
           });
 
-          // random
-          const selected = shuffle(allImages).slice(0, 7);
+          /* 
+      Step 1 — Deteksi orientasi semua foto dulu sebelum render,
+      lalu jodohkan ke slot yang tepat.
+      
+      Slot layout:
+      Row 1 (320px): [A: 7col LANDSCAPE] [B: 5col PORTRAIT]
+      Row 2 (320px): [C: 4col PORTRAIT]  [D: 8col LANDSCAPE]
+      Row 3 (200px): [E: 12col LANDSCAPE wide]
+    */
 
-          // layout pattern (bento)
-          const layouts = [
-            "md:col-span-8 aspect-[4/3]",
-            "md:col-span-4 aspect-[3/4]",
-            "md:col-span-4 aspect-square",
-            "md:col-span-4 aspect-square",
-            "md:col-span-4 aspect-square",
+          container.style.cssText = `
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 320px 320px 200px;
+      gap: 5px;
+    `;
+
+          const slotDefs = [
+            {
+              colStart: 1,
+              colEnd: 8,
+              rowStart: 1,
+              rowEnd: 2,
+              want: "landscape",
+            },
+            {
+              colStart: 8,
+              colEnd: 13,
+              rowStart: 1,
+              rowEnd: 2,
+              want: "portrait",
+            },
+            {
+              colStart: 1,
+              colEnd: 5,
+              rowStart: 2,
+              rowEnd: 3,
+              want: "portrait",
+            },
+            {
+              colStart: 5,
+              colEnd: 13,
+              rowStart: 2,
+              rowEnd: 3,
+              want: "landscape",
+            },
+            {
+              colStart: 1,
+              colEnd: 13,
+              rowStart: 3,
+              rowEnd: 4,
+              want: "landscape",
+            },
           ];
 
-          selected.forEach((src, i) => {
-            const img = new Image();
-            img.src = src;
+          /* Step 2 — Ukur orientasi foto via Image() sebelum assign ke slot */
+          const measured = [];
 
-            img.onload = () => {
-              const isPortrait = img.height > img.width;
+          function measureAll(srcs, callback) {
+            let done = 0;
+            srcs.forEach((src) => {
+              const img = new Image();
+              img.onload = () => {
+                measured.push({
+                  src,
+                  orientation:
+                    img.naturalWidth >= img.naturalHeight
+                      ? "landscape"
+                      : "portrait",
+                  ratio: img.naturalWidth / img.naturalHeight,
+                });
+                done++;
+                if (done === srcs.length) callback();
+              };
+              img.onerror = () => {
+                done++;
+                if (done === srcs.length) callback();
+              };
+              img.src = src;
+            });
+          }
 
+          /* Ambil pool foto lebih banyak supaya matching lebih leluasa */
+          const pool = shuffle(allImages).slice(
+            0,
+            Math.min(30, allImages.length),
+          );
+
+          measureAll(pool, () => {
+            const landscapes = shuffle(
+              measured.filter((m) => m.orientation === "landscape"),
+            );
+            const portraits = shuffle(
+              measured.filter((m) => m.orientation === "portrait"),
+            );
+
+            /* Step 3 — Assign foto ke slot berdasarkan orientasi */
+            const assigned = slotDefs
+              .map((slot) => {
+                const bucket =
+                  slot.want === "landscape" ? landscapes : portraits;
+                const picked =
+                  bucket.shift(); /* ambil dari depan, hapus dari pool */
+
+                /* Fallback: kalau bucket kosong, pakai dari bucket lain */
+                return {
+                  slot,
+                  photo:
+                    picked ||
+                    (slot.want === "landscape"
+                      ? portraits
+                      : landscapes
+                    ).shift(),
+                };
+              })
+              .filter(
+                (a) => a.photo,
+              ); /* buang slot yang sama sekali tidak dapat foto */
+
+            /* Step 4 — Render tiap slot */
+            assigned.forEach(({ slot, photo }, i) => {
               const item = document.createElement("div");
+              item.style.cssText = `
+          grid-column: ${slot.colStart} / ${slot.colEnd};
+          grid-row: ${slot.rowStart} / ${slot.rowEnd};
+          position: relative;
+          overflow: hidden;
+          background: #141414;
+        `;
+              item.className = "group";
 
-              // dynamic aspect
-              let aspectClass = isPortrait ? "aspect-[3/4]" : "aspect-[4/3]";
-
-              item.className = `
-      md:col-span-${i === 0 ? "8" : "4"}
-      ${aspectClass}
-      group relative overflow-hidden bg-surface-container
-    `;
-
-              item.innerHTML = `
-      <img
-        src="${src}"
-        class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-      />
-      <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-end p-6">
-        <h3 class="text-xl font-headline font-light">Featured</h3>
-      </div>
-    `;
-
+              /* Skeleton dulu */
+              item.innerHTML = `<div class="skeleton" style="position:absolute;inset:0;"></div>`;
               container.appendChild(item);
-            };
+
+              const delay = i * 0.1;
+
+              /* 
+          Step 5 — object-position cerdas:
+          - Foto portrait di slot landscape: fokus ke atas (subjek biasanya di atas)
+          - Foto landscape di slot portrait: fokus ke center
+          - Slot G (full wide): object-position center
+        */
+              let objectPos = "center center";
+              if (
+                photo.orientation === "portrait" &&
+                slot.want === "landscape"
+              ) {
+                objectPos = "center 20%"; /* subjek portrait biasanya di atas */
+              } else if (
+                photo.orientation === "landscape" &&
+                slot.want === "portrait"
+              ) {
+                objectPos = "center 30%";
+              }
+
+              const img = new Image();
+              img.src = photo.src;
+              img.onload = () => {
+                item.innerHTML = `
+            <div class="skeleton-layer skeleton" style="position:absolute;inset:0;z-index:1;"></div>
+
+            <img
+              src="${photo.src}"
+              style="
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: ${objectPos};
+                opacity: 0;
+                filter: grayscale(100%);
+                transform: scale(1.04);
+                transition:
+                  opacity 0.9s cubic-bezier(0.4,0,0.2,1) ${delay}s,
+                  transform 0.9s cubic-bezier(0.4,0,0.2,1) ${delay}s,
+                  filter 0.8s ease ${delay}s;
+              "
+              class="feat-img-bento"
+            />
+
+            <!-- Vignette sisi untuk foto yang terpotong horizontal -->
+            ${
+              photo.orientation === "portrait" && slot.want === "landscape"
+                ? `
+            <div style="
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(to right,
+                rgba(14,14,14,0.35) 0%,
+                transparent 20%,
+                transparent 80%,
+                rgba(14,14,14,0.35) 100%
+              );
+              z-index: 2;
+              pointer-events: none;
+            "></div>`
+                : ""
+            }
+
+            <!-- Vignette atas-bawah untuk foto yang terpotong vertikal -->
+            ${
+              photo.orientation === "landscape" && slot.want === "portrait"
+                ? `
+            <div style="
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(to bottom,
+                rgba(14,14,14,0.3) 0%,
+                transparent 25%,
+                transparent 75%,
+                rgba(14,14,14,0.4) 100%
+              );
+              z-index: 2;
+              pointer-events: none;
+            "></div>`
+                : ""
+            }
+
+            <!-- Grain texture overlay -->
+            <div style="
+              position: absolute;
+              inset: 0;
+              background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/><feColorMatrix type=%22saturate%22 values=%220%22/></filter><rect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22 opacity=%220.04%22/></svg>');
+              background-size: 200px 200px;
+              z-index: 3;
+              pointer-events: none;
+              opacity: 0.6;
+            "></div>
+
+            <!-- Hover overlay -->
+            <div class="feat-overlay" style="
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+              opacity: 0;
+              transition: opacity 0.5s ease;
+              z-index: 4;
+              display: flex;
+              align-items: flex-end;
+              padding: 1.25rem;
+            ">
+              <span class="feat-label" style="
+                font-size: 10px;
+                letter-spacing: 0.25em;
+                text-transform: uppercase;
+                color: white;
+                font-family: 'Inter', sans-serif;
+                opacity: 0;
+                transform: translateY(6px);
+                transition: all 0.4s ease;
+              ">Featured</span>
+            </div>
+          `;
+
+                /* Hover events */
+                item.addEventListener("mouseenter", () => {
+                  const ov = item.querySelector(".feat-overlay");
+                  const lb = item.querySelector(".feat-label");
+                  if (ov) ov.style.opacity = "1";
+                  if (lb) {
+                    lb.style.opacity = "1";
+                    lb.style.transform = "translateY(0)";
+                  }
+                });
+                item.addEventListener("mouseleave", () => {
+                  const ov = item.querySelector(".feat-overlay");
+                  const lb = item.querySelector(".feat-label");
+                  if (ov) ov.style.opacity = "0";
+                  if (lb) {
+                    lb.style.opacity = "0";
+                    lb.style.transform = "translateY(6px)";
+                  }
+                });
+
+                /* Item entrance */
+                item.style.opacity = "0";
+                item.style.transform = "translateY(12px)";
+                item.style.transition = `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s`;
+
+                requestAnimationFrame(() =>
+                  requestAnimationFrame(() => {
+                    item.style.opacity = "1";
+                    item.style.transform = "translateY(0)";
+                  }),
+                );
+
+                /* Foto fade in + skeleton fade out */
+                const featImg = item.querySelector(".feat-img-bento");
+                const skelLayer = item.querySelector(".skeleton-layer");
+
+                setTimeout(
+                  () => {
+                    if (featImg) {
+                      featImg.style.opacity = "1";
+                      featImg.style.transform = "scale(1)";
+                      featImg.style.filter = "grayscale(100%)";
+                    }
+                    setTimeout(() => {
+                      if (skelLayer) skelLayer.classList.add("hidden-skeleton");
+                    }, 600);
+                  },
+                  delay * 1000 + 200,
+                );
+              };
+
+              img.onerror = () => item.remove();
+            });
           });
         });
     </script>
@@ -510,6 +1128,96 @@
           mobileMenu.classList.add("-translate-y-full");
         });
       });
+    </script>
+    <script>
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector("nav");
+
+        if (window.scrollY > 100) {
+          nav.classList.add("bg-black/80");
+        } else {
+          nav.classList.remove("bg-black/80");
+        }
+      });
+
+      window.addEventListener("scroll", () => {
+        const hero = document.querySelector(".hero-bg");
+
+        hero.style.transform = `scale(1.08) translateY(${window.scrollY * 0.2}px)`;
+      });
+
+      const reveals = document.querySelectorAll(".reveal");
+
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+            }
+          });
+        },
+        {
+          threshold: 0.15,
+        },
+      );
+
+      reveals.forEach((el) => revealObserver.observe(el));
+    </script>
+    <script>
+      /* Page curtain open on load */
+      window.addEventListener("load", () => {
+        const curtain = document.getElementById("page-curtain");
+
+        /* Buka curtain */
+        setTimeout(() => {
+          if (curtain) curtain.classList.add("open");
+        }, 100);
+
+        /* Reveal "THE CINEMATIC" setelah curtain mulai terbuka */
+        setTimeout(() => {
+          const w1 = document.getElementById("hero-word-1");
+          if (w1) w1.classList.add("visible");
+        }, 800);
+
+        /* Reveal "GALLERY" dengan jeda */
+        setTimeout(() => {
+          const w2 = document.getElementById("hero-word-2");
+          if (w2) w2.classList.add("visible");
+        }, 1050);
+      });
+
+      /* Magnetic button */
+      document.querySelectorAll(".btn-magnetic").forEach((btn) => {
+        btn.addEventListener("mousemove", (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = `translate(${x * 0.15}px, ${y * 0.25}px)`;
+        });
+        btn.addEventListener("mouseleave", () => {
+          btn.style.transform = "translate(0, 0)";
+        });
+      });
+
+      /* Parallax mouse — hero image */
+      const heroImg = document.querySelector("#home .absolute.inset-0 img");
+      document.querySelector("#home").addEventListener("mousemove", (e) => {
+        const { innerWidth: W, innerHeight: H } = window;
+        const dx = (e.clientX / W - 0.5) * 10;
+        const dy = (e.clientY / H - 0.5) * 6;
+        if (heroImg)
+          heroImg.style.transform = `scale(1.08) translate(${dx}px, ${dy}px)`;
+      });
+
+      /* Smooth counter untuk footer atau statistik (opsional) */
+      const scrollArrow = document.querySelector(".animate-bounce");
+      if (scrollArrow) {
+        scrollArrow.addEventListener("click", () => {
+          document
+            .getElementById("gallery")
+            .scrollIntoView({ behavior: "smooth" });
+        });
+      }
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>

@@ -110,12 +110,315 @@
       .gallery-item:hover img {
         transform: scale(1.05);
       }
+      /* Custom cursor */
+      * {
+        cursor: none !important;
+      }
+
+      #cursor-dot {
+        width: 8px;
+        height: 8px;
+        background: #fff;
+        border-radius: 50%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition:
+          transform 0.1s ease,
+          width 0.3s ease,
+          height 0.3s ease,
+          opacity 0.3s ease;
+        mix-blend-mode: difference;
+      }
+
+      #cursor-ring {
+        width: 36px;
+        height: 36px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.4s ease,
+          height 0.4s ease,
+          opacity 0.3s ease;
+        mix-blend-mode: difference;
+      }
+
+      #cursor-dot.hovering {
+        width: 12px;
+        height: 12px;
+      }
+
+      #cursor-ring.hovering {
+        width: 56px;
+        height: 56px;
+        opacity: 0.4;
+      }
+
+      /* Page curtain */
+      #page-curtain {
+        position: fixed;
+        inset: 0;
+        background: #0e0e0e;
+        z-index: 9990;
+        transform-origin: top;
+        transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+      #page-curtain.open {
+        transform: scaleY(0);
+      }
+
+      /* Hero title reveal */
+      .text-reveal-wrap {
+        overflow: hidden;
+        display: inline-block;
+      }
+      .text-reveal-inner {
+        display: inline-block;
+        transform: translateY(110%);
+        transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+      .text-reveal-inner.visible {
+        transform: translateY(0%);
+      }
+
+      /* Subtitle fade */
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+      }
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Filter bar slide in */
+      .filter-reveal {
+        opacity: 0;
+        transform: translateX(-16px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .filter-reveal.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* Filter button transition */
+      [data-filter] {
+        transition:
+          color 0.3s ease,
+          border-color 0.3s ease,
+          letter-spacing 0.3s ease;
+      }
+      [data-filter]:hover {
+        letter-spacing: 0.22em;
+      }
+
+      /* Gallery item entrance */
+      @keyframes itemReveal {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .gallery-item-enter {
+        animation: itemReveal 0.6s ease forwards;
+        opacity: 0;
+      }
+
+      /* Gallery image hover */
+      .break-inside-avoid {
+        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .break-inside-avoid:hover {
+        transform: translateY(-4px);
+      }
+
+      /* Hover label pada gambar */
+      .img-label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem 1.25rem;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        color: #fff;
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        font-family: "Manrope", sans-serif;
+        opacity: 0;
+        transform: translateY(6px);
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease;
+        z-index: 2;
+      }
+      .break-inside-avoid:hover .img-label {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Load more button */
+      #loadMoreBtn {
+        position: relative;
+        overflow: hidden;
+        transition: color 0.4s ease;
+      }
+      #loadMoreBtn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: #fff;
+        transform: translateY(101%);
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 0;
+      }
+      #loadMoreBtn:hover::before {
+        transform: translateY(0);
+      }
+      #loadMoreBtn:hover {
+        color: #000;
+        border-color: #fff;
+      }
+      #loadMoreBtn span {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Nav link underline */
+      nav a {
+        position: relative;
+      }
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0%;
+        height: 1px;
+        background: #fff;
+        transition: width 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      /* Nav scroll */
+      nav {
+        transition: all 0.5s ease;
+      }
+
+      /* Footer link hover */
+      footer a {
+        display: inline-block;
+        transition:
+          transform 0.3s ease,
+          color 0.3s ease;
+      }
+      footer a:hover {
+        transform: translateY(-3px);
+      }
+
+      /* Shimmer saat filter switch */
+      @keyframes shimmerFade {
+        from {
+          opacity: 0.4;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .gallery-shimmer {
+        animation: shimmerFade 0.4s ease forwards;
+      }
+      @media (max-width: 768px) {
+        #cursor-dot,
+        #cursor-ring {
+          display: none;
+        }
+      }
+      /* Skeleton shimmer placeholder */
+      @keyframes skeletonShimmer {
+        0% {
+          background-position: -400px 0;
+        }
+        100% {
+          background-position: 400px 0;
+        }
+      }
+
+      .skeleton {
+        background: linear-gradient(
+          90deg,
+          #1a1a1a 25%,
+          #2a2a2a 50%,
+          #1a1a1a 75%
+        );
+        background-size: 800px 100%;
+        animation: skeletonShimmer 1.4s ease-in-out infinite;
+      }
+
+      /* Foto muncul dengan fade smooth */
+      .gallery-img {
+        opacity: 0;
+        transition:
+          opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: scale(1.04);
+      }
+
+      .gallery-img.loaded {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* Wrapper gambar relative untuk transisi */
+      .img-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .skeleton-layer {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        transition: opacity 0.6s ease;
+      }
+
+      .skeleton-layer.hidden-skeleton {
+        opacity: 0;
+        pointer-events: none;
+      }
     </style>
   </head>
   <body
     class="font-body selection:bg-primary selection:text-on-primary"
     oncontextmenu="return false;"
   >
+    <!-- Custom Cursor Overlay (Visual Element only) -->
+    <div id="page-curtain"></div>
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
     <!-- TopNavBar -->
     <nav
       class="fixed top-0 w-full z-50 bg-transparent dark:bg-neutral-950/60 backdrop-blur-xl flex justify-between items-center px-8 py-6 w-full"
@@ -183,19 +486,30 @@
         >
           <div>
             <span
-              class="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant mb-4 block"
+              class="fade-in-up font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant mb-4 block"
+              id="hero-label"
             >
               All Time Archive
             </span>
             <h1
               class="font-headline text-5xl md:text-8xl font-light tracking-tighter text-primary leading-none"
             >
-              THE COLLECTION
+              <span class="text-reveal-wrap"
+                ><span class="text-reveal-inner" id="hero-word-1"
+                  >THE</span
+                ></span
+              >
+              <span class="text-reveal-wrap"
+                ><span class="text-reveal-inner" id="hero-word-2"
+                  >COLLECTION</span
+                ></span
+              >
             </h1>
           </div>
           <div class="max-w-md">
             <p
-              class="font-body text-on-surface-variant text-sm leading-relaxed"
+              class="fade-in-up font-body text-on-surface-variant text-sm leading-relaxed"
+              id="hero-desc"
             >
               A curated selection of visual narratives, where light, shadow, and
               perspective converge into timeless moments.
@@ -211,37 +525,43 @@
         >
           <button
             data-filter="all works"
-            class="font-label text-[11px] uppercase tracking-widest text-primary border-b border-primary pb-1"
+            class="filter-reveal font-label text-[11px] uppercase tracking-widest text-primary border-b border-primary pb-1"
+            style="transition-delay: 0s"
           >
             All Works
           </button>
           <button
             data-filter="landscape"
-            class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
+            class="filter-reveal font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
+            style="transition-delay: 0.05s"
           >
             Landscape
           </button>
           <button
             data-filter="portrait"
-            class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
+            class="filter-reveal font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
+            style="transition-delay: 0.1s"
           >
             Portrait
           </button>
           <button
             data-filter=".feast"
-            class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
+            class="filter-reveal font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
+            style="transition-delay: 0.15s"
           >
             .Feast
           </button>
           <button
             data-filter="the lantis"
-            class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
+            class="filter-reveal font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
+            style="transition-delay: 0.2s"
           >
             The Lantis
           </button>
           <button
             data-filter="hindia"
-            class="font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
+            class="filter-reveal font-label text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-primary"
+            style="transition-delay: 0.25s"
           >
             Hindia
           </button>
@@ -259,13 +579,52 @@
         <div class="flex justify-center mt-16">
           <button
             id="loadMoreBtn"
-            class="px-8 py-3 border border-white/20 text-sm uppercase tracking-[0.2em] text-white hover:bg-white hover:text-black transition duration-300"
+            class="px-8 py-3 border border-white/20 text-sm uppercase tracking-[0.2em] text-white"
           >
-            Load More
+            <span>Load More</span>
           </button>
         </div>
       </section>
     </main>
+    <!-- Footer -->
+    <footer
+      class="bg-neutral-900 dark:bg-[#0E0E0E] py-24 flex flex-col items-center justify-center space-y-8 w-full"
+    >
+      <div
+        class="text-neutral-50 font-bold tracking-[0.2em] font-headline text-xl"
+      >
+        SOCIALS
+      </div>
+      <div class="flex flex-wrap justify-center gap-8 md:gap-12">
+        <a
+          class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 hover:text-neutral-50 transition-colors duration-300"
+          href="https://www.instagram.com/tatta.lens/"
+          target="_blank"
+          >Instagram</a
+        >
+        <a
+          class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 hover:text-neutral-50 transition-colors duration-300"
+          href="https://www.youtube.com/@livilingiblin"
+          target="_blank"
+          >Youtube</a
+        >
+        <a
+          class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 hover:text-neutral-50 transition-colors duration-300"
+          href="#"
+          >Back to Top</a
+        >
+      </div>
+      <div
+        class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 pt-8 opacity-50 text-center md:text-left"
+      >
+        <span class="block md:inline">
+          © 2026 TATTA'S LENS. All images are protected by copyright.</span
+        >
+        <span class="block md:inline md:ml-2">
+          The Cinematic Gallery. Created & Designed.
+        </span>
+      </div>
+    </footer>
     <!-- SCRIPT -->
     <script>
       document.addEventListener("dragstart", (e) => e.preventDefault());
@@ -294,34 +653,79 @@
         return `aspect-[${ratio}]`;
       }
 
-      function createGalleryItem(src, category) {
+      function createGalleryItem(src, category, delayIndex) {
+        const item = document.createElement("div");
+        item.className = "break-inside-avoid group overflow-hidden relative";
+        item.setAttribute("data-category", category);
+
+        /* Tampilkan skeleton dulu dengan aspect ratio default */
+        item.innerHTML = `<div class="aspect-[3/4] skeleton"></div>`;
+        gallery.appendChild(item);
+
         const img = new Image();
         img.src = src;
 
         img.onload = function () {
           const ratio = getAspectRatio(img.naturalWidth, img.naturalHeight);
+          const aspectClass = getAspectClass(ratio);
+          const delay = delayIndex * 0.07;
 
-          const item = document.createElement("div");
-
-          item.className = "break-inside-avoid group overflow-hidden relative";
-
-          item.setAttribute("data-category", category);
-
+          /* Ganti skeleton dengan konten asli */
           item.innerHTML = `
-        <div class="${getAspectClass(ratio)}">
-          <img
-            src="${src}"
-            loading="lazy"
-            class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
-          />
+      <div class="${aspectClass} img-wrapper">
+        <div class="skeleton-layer skeleton"></div>
+        <img
+          src="${src}"
+          class="gallery-img w-full h-full object-cover group-hover:scale-105"
+          style="transition-delay: ${delay}s"
+        />
+        <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition duration-500 z-10"></div>
+        <div class="img-label" style="z-index: 11">${category}</div>
+      </div>
+    `;
 
-          <div class="absolute inset-0"></div>
-        </div>
+          /* Masukkan animasi entrance pada item */
+          item.style.opacity = "0";
+          item.style.transform = "translateY(20px)";
+          item.style.transition = `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s`;
 
-        <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition"></div>
-      `;
+          /* Trigger animasi entrance item setelah satu frame */
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              item.style.opacity = "1";
+              item.style.transform = "translateY(0)";
+            });
+          });
 
-          gallery.appendChild(item);
+          /* Trigger fade-in foto setelah item muncul */
+          const galleryImg = item.querySelector(".gallery-img");
+          const skeletonLayer = item.querySelector(".skeleton-layer");
+
+          setTimeout(
+            () => {
+              if (galleryImg) galleryImg.classList.add("loaded");
+              setTimeout(() => {
+                if (skeletonLayer)
+                  skeletonLayer.classList.add("hidden-skeleton");
+              }, 400);
+            },
+            delay * 1000 + 100,
+          );
+
+          /* Cursor hover */
+          item.addEventListener("mouseenter", () => {
+            dot?.classList.add("hovering");
+            ring?.classList.add("hovering");
+          });
+          item.addEventListener("mouseleave", () => {
+            dot?.classList.remove("hovering");
+            ring?.classList.remove("hovering");
+          });
+        };
+
+        img.onerror = function () {
+          /* Kalau gagal load, hapus skeleton biar tidak ada ghost */
+          item.remove();
         };
       }
 
@@ -343,8 +747,8 @@
           currentIndex + ITEMS_PER_LOAD,
         );
 
-        nextItems.forEach((item) => {
-          createGalleryItem(item.src, item.category);
+        nextItems.forEach((item, i) => {
+          createGalleryItem(item.src, item.category, i);
         });
 
         currentIndex += ITEMS_PER_LOAD;
@@ -397,52 +801,96 @@
         });
       });
     </script>
-    <!-- Footer -->
-    <footer
-      class="bg-neutral-900 dark:bg-[#0E0E0E] py-24 flex flex-col items-center justify-center space-y-8 w-full"
-    >
-      <div
-        class="text-neutral-50 font-bold tracking-[0.2em] font-headline text-xl"
-      >
-        SOCIALS
-      </div>
-      <div class="flex flex-wrap justify-center gap-8 md:gap-12">
-        <a
-          class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 hover:text-neutral-50 transition-colors duration-300"
-          href="https://www.instagram.com/tatta.lens/"
-          target="_blank"
-          >Instagram</a
-        >
-        <a
-          class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 hover:text-neutral-50 transition-colors duration-300"
-          href="https://www.youtube.com/@livilingiblin"
-          target="_blank"
-          >Youtube</a
-        >
-        <a
-          class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 hover:text-neutral-50 transition-colors duration-300"
-          href="#"
-          >Back to Top</a
-        >
-      </div>
-      <div
-        class="font-inter text-[10px] uppercase tracking-widest text-neutral-500 pt-8 opacity-50 text-center md:text-left"
-      >
-        <span class="block md:inline">
-          © 2026 TATTA'S LENS. All images are protected by copyright.</span
-        >
-        <span class="block md:inline md:ml-2">
-          The Cinematic Gallery. Created & Designed.
-        </span>
-      </div>
-    </footer>
-    <!-- Custom Cursor Overlay (Visual Element only) -->
-    <div
-      class="fixed pointer-events-none z-[100] mix-blend-difference hidden md:block"
-      id="cursor"
-    >
-      <div class="w-4 h-4 bg-white rounded-full"></div>
-    </div>
+    <script>
+      /* Page curtain */
+      window.addEventListener("load", () => {
+        const curtain = document.getElementById("page-curtain");
+        const w1 = document.getElementById("hero-word-1");
+        const w2 = document.getElementById("hero-word-2");
+        const label = document.getElementById("hero-label");
+        const desc = document.getElementById("hero-desc");
+
+        /* Step 1 — buka curtain */
+        setTimeout(() => {
+          if (curtain) curtain.classList.add("open");
+        }, 100);
+
+        /* Step 2 — reveal "THE" */
+        setTimeout(() => {
+          if (w1) w1.classList.add("visible");
+        }, 900);
+
+        /* Step 3 — reveal "COLLECTION" */
+        setTimeout(() => {
+          if (w2) w2.classList.add("visible");
+        }, 1100);
+
+        /* Step 4 — fade label & desc */
+        setTimeout(() => {
+          if (label) label.classList.add("visible");
+          if (desc) desc.classList.add("visible");
+        }, 1300);
+
+        /* Step 5 — filter buttons slide in */
+        setTimeout(() => {
+          document.querySelectorAll(".filter-reveal").forEach((el, i) => {
+            setTimeout(() => el.classList.add("visible"), i * 80);
+          });
+        }, 1500);
+      });
+
+      /* Custom cursor */
+      const dot = document.getElementById("cursor-dot");
+      const ring = document.getElementById("cursor-ring");
+
+      let mouseX = 0,
+        mouseY = 0;
+      let ringX = 0,
+        ringY = 0;
+
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (dot) {
+          dot.style.left = mouseX + "px";
+          dot.style.top = mouseY + "px";
+        }
+      });
+
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.12;
+        ringY += (mouseY - ringY) * 0.12;
+        if (ring) {
+          ring.style.left = ringX + "px";
+          ring.style.top = ringY + "px";
+        }
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+
+      document
+        .querySelectorAll("a, button, .break-inside-avoid")
+        .forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            dot?.classList.add("hovering");
+            ring?.classList.add("hovering");
+          });
+          el.addEventListener("mouseleave", () => {
+            dot?.classList.remove("hovering");
+            ring?.classList.remove("hovering");
+          });
+        });
+
+      /* Nav scroll darken */
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector("nav");
+        if (window.scrollY > 80) {
+          nav.classList.add("bg-black/80");
+        } else {
+          nav.classList.remove("bg-black/80");
+        }
+      });
+    </script>
     <script>
       const menuBtn = document.getElementById("menu-btn");
       const mobileMenu = document.getElementById("mobile-menu");
